@@ -1,8 +1,8 @@
 # Automated-Long-Answer-Grading
-Automated Long Answer Grading (AIED 2024)
+Automated Long Answer Grading (AIED 2024) - Code coming by April 29..
 
 ## Request for RiceChem dataset
-Google form coming soon..
+Google form to request dataset access coming by April 29..
 
 ## Data Preprocessing
 
