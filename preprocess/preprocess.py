@@ -4,7 +4,6 @@ import argparse
 import os
 import json
 
-# Set parameters
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset_name", type=str, default="CHEM121", help="the name of the dataset")
@@ -17,14 +16,8 @@ def parse_args():
     parser.add_argument("--unseen_split", action='store_true', help="whether to split data for unseen questions")
     
     params = parser.parse_args()
-    # if params.unseen_split:
-    #     # Hard code the splits here since the actual splits are hard coded for unseen split
-    #     params.train_size = 8.0
-    #     params.valid_size = 2.0
-    #     params.test_size = 1.0
     return params
 
-# Concat paths
 def concat_path(data_dir, answer_files, rubric_files):
     prefix = data_dir + '/'
     for i in range(len(answer_files)):
@@ -32,7 +25,6 @@ def concat_path(data_dir, answer_files, rubric_files):
     for i in range(len(rubric_files)):
         rubric_files[i] = prefix + rubric_files[i]
 
-# Map ids to answers
 def map_ids_answers(answer_file):
     id2ans = dict()
     with open(answer_file, 'r') as file:
@@ -53,9 +45,6 @@ def map_ids_answers(answer_file):
     return id2ans
 
 def get_questions(answer_csvs):
-    # invalid_items = set(['score', 'adjustment', 'comments', 'blank', 'incorrect', 'core charge calculation error',
-    #                         'incorrect statement included', 'correct response', 'incorrect/blank response', 'incorrect/missing answer', 'incorrect/misleading statement'])
-
     id2ques = dict()
 
     for i, answer_csv in enumerate(answer_csvs):
@@ -390,5 +379,3 @@ if __name__ == "__main__":
     id2ques = get_questions(answer_files)
     with open(args.output_dir + "/question_rubrics.json", 'w') as file:
         json.dump(id2ques, file)
-
-    
