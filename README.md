@@ -1,62 +1,48 @@
-# Rubric-Assisted Automated Short Answer Grading
+# Automated Long Answer Grading with RiceChem Dataset
 
-This repository contains code for the paper: [Enhancing Explainability and Performance in Automated Short Answer Grading through Rubric-Based Assessment](https://arxiv.org/abs/xxxx.yyyyy)
+This repository contains code for the paper: [Automated Long Answer Grading with RiceChem Dataset](https://arxiv.org/abs/2404.14316)
 
 ## Dependencies
-Please install dependencies in [requirements.txt](https://github.com/luffycodes/Rubric-ASAG/blob/main/requirements.txt).
+Please install dependencies in [requirements.txt](https://github.com/luffycodes/Automated-Long-Answer-Grading/blob/review/requirements.txt).
 
 ## Preprocessing
-[dataset/preprocess.py](https://github.com/luffycodes/Rubric-ASAG/blob/main/dataset/preprocess.py) preprocesses the raw data into correct formats.
-
-Usage:
+[preprocess/preprocess.py](https://github.com/luffycodes/Automated-Long-Answer-Grading/blob/review/preprocess/preprocess.py) preprocesses raw data in the data dir into required formats.
 ```
-python dataset/preprocess.py --dataset_name CHEM121 --data_dir data --train_size 0.8 --valid_size 0.1 --test_size 0.1 --seed 42
+python preprocess/preprocess.py --data_dir data --output_dir data_processed --train_size 0.8 --valid_size 0.1 --test_size 0.1
 ```
 
 ## Running encoder models
-[encoder_model/train_and_evaluate.py](https://github.com/luffycodes/Rubric-ASAG/blob/main/encoder_model/train_and_evaluate.py) trains and evaluates encoder models on the processed data.
-
-Usage:
+[encoder_model/run_encoder_models.py](https://github.com/luffycodes/Automated-Long-Answer-Grading/blob/review/encoder_model/run_encoder_models.py) trains and evaluates encoder models on the processed data.
 ```
-# Running on data with rubrics
-python encoder_model/train_and_evaluate.py --dataset_name CHEM121 --data_dir data --train_size 0.8 --valid_size 0.1 --test_size 0.1 --seed 42 --use_rubric --metric_for_best_model f1 --model roberta-base --num_train_epochs 10 --train_batch_size 16 --eval_batch_size 16 --learning_rate 0.00002 --cache_dir cache --output_dir output
-
-# Running on data without rubrics
-python encoder_model/train_and_evaluate.py --dataset_name CHEM121 --data_dir data --train_size 0.8 --valid_size 0.1 --test_size 0.1 --seed 42 --metric_for_best_model f1 --model roberta-base --num_train_epochs 10 --train_batch_size 16 --eval_batch_size 16 --learning_rate 0.00002 --cache_dir cache --output_dir output
+# Running with rubrics
+CUDA_VISIBLE_DEVICES=0 python encoder_model/run_encoder_models.py --train_size 0.8 --valid_size 0.1 --test_size 0.1 --seed 42 --use_rubric --metric_for_best_model f1 --model roberta-large-mnli --num_train_epochs 10 --train_batch_size 16 --eval_batch_size 16 --learning_rate 0.00002
+```
+```
+# Running without rubrics
+CUDA_VISIBLE_DEVICES=0 python encoder_model/run_encoder_models.py --train_size 0.8 --valid_size 0.1 --test_size 0.1 --seed 42 --metric_for_best_model f1 --model roberta-large-mnli --num_train_epochs 10 --train_batch_size 16 --eval_batch_size 16 --learning_rate 0.00002
 ```
 
 ## Running decoder models
-[decoder_model/prompt_gpt.py](https://github.com/luffycodes/Rubric-ASAG/blob/main/decoder_model/prompt_gpt.py) prompts GPT with the preprocessed data and stores results using IO redirect.
-
-Usage:
+[decoder_model/run_decoder_models.py](https://github.com/luffycodes/Automated-Long-Answer-Grading/blob/review/decoder_model/run_decoder_models.py) evaluates encoder models(LLMs) on the processed data.
 ```
-# Running a new experiment
-python decoder_model/prompt_gpt.py --dataset_name CHEM121 --data_dir data --train_size 0.8 --valid_size 0.1 --test_size 0.1 --seed 42 --use_rubric --engine gpt-4 --prompt_choice zero_shot --max_tokens 2048 --output_dir output
-
-# Resuming the experiment
-python decoder_model/prompt_gpt.py --dataset_name CHEM121 --data_dir data --train_size 0.8 --valid_size 0.1 --test_size 0.1 --seed 42 --use_rubric --engine gpt-4 --prompt_choice zero_shot --max_tokens 2048 --output_dir output
+# Running with GPT
+export OPENAI_API_KEY="key"
+python decoder_model/run_decoder_models.py --test_size 0.1 --seed 42 --use_rubric --model gpt-3.5-turbo-0125
 ```
-
-[decoder_model/evaluate_gpt.py](https://github.com/luffycodes/Rubric-ASAG/blob/main/decoder_model/evaluate_gpt.py) evalutes the GPT IO output text file.
-
-Usage:
 ```
-# Evaluating results on data with rubrics
-python decoder_model/evaluate_gpt.py --gpt_io_file some_gpt_io_file.txt --use_rubric
-
-# Evaluating results on data without rubrics
-python decoder_model/evaluate_gpt.py --gpt_io_file some_gpt_io_file.txt
+# Running with open-sourced LLMs
+CUDA_VISIBLE_DEVICES=0 python decoder_model/run_decoder_models.py --test_size 0.1 --seed 42 --use_rubric --model mistralai/Mistral-7B-Instruct-v0.2
 ```
 
-If you use this work, please cite:
-Enhancing Explainability and Performance in Automated Short Answer Grading through Rubric-Based Assessment
-(https://arxiv.org/abs/xxxx.yyyyy)
+
+<br> If you use this work, please cite:
 ```
-@misc{kangqi2023rasag,
-      title={Enhancing Explainability and Performance in Automated Short Answer Grading through Rubric-Based Assessment}, 
-      author={Kangqi Ni and Shashank Sonkar and Richard G. Baraniuk},
-      year={2023},
-      eprint={xxxx.yyyyy},
+@misc{sonkar2024automated,
+      title={Automated Long Answer Grading with RiceChem Dataset}, 
+      author={Shashank Sonkar and Kangqi Ni and Lesa Tran Lu and Kristi Kincaid and John S. Hutchinson and Richard G. Baraniuk},
+      year={2024},
+      eprint={2404.14316},
       archivePrefix={arXiv},
       primaryClass={cs.CL}
 }
+```
