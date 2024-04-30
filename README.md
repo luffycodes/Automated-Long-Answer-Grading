@@ -6,10 +6,10 @@ This repository contains code for the paper: [Automated Long Answer Grading with
 Please fill out this [google form](https://forms.gle/d3sYD5vMXnK5aMKo6) to request the RiceChem dataset. Place the data folder into the root dir.
 
 ## Dependencies
-Install dependencies with [requirements.txt](https://github.com/luffycodes/Automated-Long-Answer-Grading/blob/review/requirements.txt).
+Install dependencies with [requirements.txt](https://github.com/luffycodes/Automated-Long-Answer-Grading/blob/main/requirements.txt).
 
 ## Preprocess
-[preprocess/preprocess.py](https://github.com/luffycodes/Automated-Long-Answer-Grading/blob/review/preprocess/preprocess.py) preprocesses raw data in the data dir into required formats.
+[preprocess/preprocess.py](https://github.com/luffycodes/Automated-Long-Answer-Grading/blob/main/preprocess/preprocess.py) preprocesses raw data in the data dir into required formats.
 ```
 # Preprocess the raw data of all questions uniformly into splits
 python preprocess/preprocess.py --data_dir data --output_dir data_processed --train_size 0.8 --valid_size 0.1 --test_size 0.1
@@ -20,7 +20,7 @@ python preprocess/preprocess.py --data_dir data --output_dir data_processed --tr
 ```
 
 ## Run encoder models
-[encoder_model/run_encoder_models.py](https://github.com/luffycodes/Automated-Long-Answer-Grading/blob/review/encoder_model/run_encoder_model.py) trains and evaluates encoder models on the processed data.
+[encoder_model/run_encoder_models.py](https://github.com/luffycodes/Automated-Long-Answer-Grading/blob/main/encoder_model/run_encoder_model.py) trains and evaluates encoder models on the processed data.
 ```
 # Run with rubrics (Section 4.2 Benchmarking on Discriminative Models + Section 4.3 The Value of Entailment Formulation in ALAG)
 CUDA_VISIBLE_DEVICES=0 python encoder_model/run_encoder_model.py --data_dir data_processed --train_size 0.8 --valid_size 0.1 --test_size 0.1 --seed 42 --use_rubric --metric_for_best_model f1 --model roberta-large-mnli --num_train_epochs 10 --train_batch_size 16 --eval_batch_size 16 --learning_rate 0.00002
@@ -35,7 +35,7 @@ CUDA_VISIBLE_DEVICES=0 python encoder_model/run_encoder_model.py --data_dir data
 ```
 
 ## Run decoder models
-[decoder_model/run_decoder_models.py](https://github.com/luffycodes/Automated-Long-Answer-Grading/blob/review/decoder_model/run_decoder_model.py) evaluates encoder models(LLMs) on the processed data.
+[decoder_model/run_decoder_models.py](https://github.com/luffycodes/Automated-Long-Answer-Grading/blob/main/decoder_model/run_decoder_model.py) evaluates encoder models(LLMs) on the processed data.
 ```
 # Run GPT (Section 4.6 Benchmarking on Large Language Models)
 export OPENAI_API_KEY="key"
