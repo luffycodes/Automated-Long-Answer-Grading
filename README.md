@@ -8,7 +8,7 @@ Please fill out this [google form](https://forms.gle/d3sYD5vMXnK5aMKo6) to reque
 ## Dependencies
 Install dependencies with [requirements.txt](https://github.com/luffycodes/Automated-Long-Answer-Grading/blob/main/requirements.txt).
 
-## Preprocess
+### Preprocess
 [preprocess/preprocess.py](https://github.com/luffycodes/Automated-Long-Answer-Grading/blob/main/preprocess/preprocess.py) preprocesses raw data in the data dir into required formats.
 ```
 # Preprocess the raw data of all questions uniformly into splits
