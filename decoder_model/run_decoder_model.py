@@ -34,7 +34,7 @@ def add_params():
     parser.add_argument("--seed", type=int, default=42, help="the seed for the random module")
 
     parser.add_argument("--output_dir", type=str, default="llm_output", help="the directory to the output")
-    parser.add_argument("--cache_dir", type=str, default="/data/kn22/cache", help="the directory to the cache")
+    parser.add_argument("--cache_dir", type=str, default="cache", help="the directory to the cache")
 
     params = parser.parse_args()
 
