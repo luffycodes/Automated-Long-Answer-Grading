@@ -3,7 +3,7 @@
 This repository contains code for the paper: [Automated Long Answer Grading with RiceChem Dataset](https://arxiv.org/abs/2404.14316)
 
 ## Request for Data
-Please fill out this [google form]() to request the RiceChem dataset. Place the data folder into the root dir.
+Please fill out this [google form](https://forms.gle/d3sYD5vMXnK5aMKo6) to request the RiceChem dataset. Place the data folder into the root dir.
 
 ## Dependencies
 Install dependencies with [requirements.txt](https://github.com/luffycodes/Automated-Long-Answer-Grading/blob/review/requirements.txt).
