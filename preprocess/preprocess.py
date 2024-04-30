@@ -350,15 +350,15 @@ if __name__ == "__main__":
     args = parse_args()
 
     # List files
-    answer_files = ["Sample CHEM121 Student Answers.xlsx - F20 Exam 2 Q4.csv",
-                "Sample CHEM121 Student Answers.xlsx - F20 Exam 2 Q7.csv",
-                "Sample CHEM121 Student Answers.xlsx - F20 Exam 3 Q7.csv",
-                "Sample CHEM121 Student Answers.xlsx - F20 Final Exam Q3.csv"
+    answer_files = ["Student Answers Q1.csv",
+                "Student Answers Q2.csv",
+                "Student Answers Q3.csv",
+                "Student Answers Q4.csv"
                 ]
-    rubric_files = ["Sample CHEM121 Gradescope Export.xlsx - F20 Exam 2 Q4.csv",
-                "Sample CHEM121 Gradescope Export.xlsx - F20 Exam 2 Q7.csv",
-                "Sample CHEM121 Gradescope Export.xlsx - F20 Exam 3 Q7.csv",
-                "Sample CHEM121 Gradescope Export.xlsx - F20 Final Exam Q3.csv"
+    rubric_files = ["Graded Rubric Q1.csv",
+                "Graded Rubric Q2.csv",
+                "Graded Rubric Q3.csv",
+                "Graded Rubric Q4.csv"
                 ]
 
     # Set the invalid rubric items
